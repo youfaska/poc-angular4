@@ -24,21 +24,10 @@ import { HeroService } from './hero.service';
 
 
 @Component({
-  selector: 'app-root',
-  //templateUrl: './app.component.html',
+  selector: 'my-app',
+  templateUrl: './hero-list.component.html',
   providers: [HeroService],
   styleUrls: ['./app.component.css'],
-  template: `<h1>{{title}}</h1>
-    <h2>My Heroes</h2>
-    <ul class="heroes">
-      <li *ngFor="let hero of heroes"
-        [class.selected]="hero === selectedHero"
-        (click)="onSelect(hero)">
-        <span class="badge">{{hero.id}}</span> {{hero.name}}
-      </li>
-    </ul>
-    <hero-detail [hero]="selectedHero"></hero-detail>
-`,
   styles: [`
   .selected {
     background-color: #CFD8DC !important;
@@ -96,6 +85,7 @@ export class AppComponent implements OnInit{
   //hero = 'Windstorm';
   //heroes = HEROES;
   title = 'Tour of Heroes';
+   myHero = 'Windstorm';
   constructor(private heroService: HeroService) { }
   //heroService = new HeroService(); // don't do this
 
@@ -122,7 +112,8 @@ export class AppComponent implements OnInit{
   }
   ngOnInit(): void {
     
-    console.log(this.heroService.leerDatos());
+    //console.log(this.heroService.leerDatos());
+    //this.heroService.fetchData();
     return this.getHeroes();
   }
   

@@ -15,15 +15,24 @@ export class HeroService {
   }
   private commentsUrl = 'http://localhost:8080/hero/list';
   
+  fetchData(){
+   this.http
+    .get('http://localhost:8080/hero/list').subscribe(
+    (data) => console.log(data)
+    );
+  }
+  
   leerDatos(): Observable<Response> {  
   // Se declara cómo va a ser la llamada 
   // ocultando los pormenores a los consumidores   
     this.http
-    .get('http://localhost:8080/hero/list')
-    .map(res => res.json()).forEach(value => console.log(value));
+    .get('http://localhost:8080/hero/list').subscribe(
+    (data) => console.log(data)
+    )
+    
   return this.http
     .get('http://localhost:8080/hero/list')
-    .map(res => res.json());
+    .map(res => (<Response>res).json());
   // En este momento aún no se efectuó la llamada
 }
 
