@@ -1,10 +1,18 @@
 <h1>{{title}}</h1>
-<h2>My favorite hero is: {{myHero}}</h2>
-<h2>My Heroes</h2>
+<h2>Ma derniere intevention est: {{myHero}}</h2>
+<h2>Mes interventions</h2>
 <ul class="heroes">
 	<li *ngFor="let hero of heroes"
 		[class.selected]="hero === selectedHero" (click)="onSelect(hero)">
-		<span class="badge">{{hero.id}}</span> {{hero.name}}
+		<span class="badge">{{hero.id}}</span>{{hero.name}}
 	</li>
 </ul>
+<button (click)="onClickMe()">Click me!</button>
+{{clickMessage}}
+<input (keyup)="onKey($event)">
+<p>{{values}}</p>
+<input #box (keyup)="0">
+<p>{{box.value}}</p>
+<h4>Type away! Press [enter] when done.</h4>
+<div><key-up3></key-up3></div>
 <hero-detail [hero]="selectedHero"></hero-detail>

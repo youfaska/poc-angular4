@@ -2,27 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Hero } from './hero';
 import { HeroService } from './hero.service';
 
-
-/*export class Hero {
-  id: number;
-  name: string;
-}*/
-
-
-/*const HEROES: Hero[] = [
-  { id: 1, name: 'Mr. Nice' },
-  { id: 2, name: 'Narco' },
-  { id: 3, name: 'Bombasto' },
-  { id: 4, name: 'Celeritas' },
-  { id: 5, name: 'Magneta' },
-  { id: 6, name: 'RubberMan' },
-  { id: 7, name: 'Dynama' },
-  { id: 8, name: 'Dr IQ' },
-  { id: 9, name: 'Magma' },
-  { id: 10, name: 'Tornado' }
-];*/
-
-
 @Component({
   selector: 'my-app',
   templateUrl: './hero-list.component.html',
@@ -79,25 +58,32 @@ import { HeroService } from './hero.service';
 `]
 })
 
-export class AppComponent implements OnInit{
-  /*title = 'Asset&Fleet, Welcome to my world: ANGULAR 4';
-  color: string;*/
-  //hero = 'Windstorm';
-  //heroes = HEROES;
-  title = 'Tour of Heroes';
-   myHero = 'Windstorm';
-  constructor(private heroService: HeroService) { }
-  //heroService = new HeroService(); // don't do this
-
-  /*hero: Hero = {
-    id: 1,
-    name: 'Windstorm'
-  };*/
+export class AppComponent implements OnInit {
+  clickMessage = '';
+  title = '';
   selectedHero: Hero;
   heroes: Hero[];
+  heroesII = ['YOUFASKA', 'Bombasto', 'Magneta', 'Tornado'];
+  myHero = this.heroesII[0];
+  values = '';
+
+  constructor(private heroService: HeroService) {
+    this.title = 'Inteventions';
+  }
+//  onKey(event: any) { // without type info
+//    this.values += event.target.value + ' | ';
+//  }
+
+  onKey(event: KeyboardEvent) { // with type info
+    this.values += (<HTMLInputElement>event.target).value + ' | ';
+  }
+  
+  onClickMe(): void {
+    this.clickMessage = 'Vous avez lance une demander...';
+  }
+
   getHeroes(): void {
-     this.heroService.getHeroes().then(heroes => this.heroes = heroes);
-    //this.heroService.getHeroesRest();
+    this.heroService.getHeroes().then(heroes => this.heroes = heroes);
   }
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
@@ -111,11 +97,9 @@ export class AppComponent implements OnInit{
     }
   }
   ngOnInit(): void {
-    
-    //console.log(this.heroService.leerDatos());
-    //this.heroService.fetchData();
+    console.log("Inicializamos la lista...");
     return this.getHeroes();
   }
-  
+
 
 }
