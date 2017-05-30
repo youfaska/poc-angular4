@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from './hero';
 import { HeroService } from './hero.service';
+import { Intervention } from './intervention';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'my-app',
@@ -66,6 +68,8 @@ export class AppComponent implements OnInit {
   heroesII = ['YOUFASKA', 'Bombasto', 'Magneta', 'Tornado'];
   myHero = this.heroesII[0];
   values = '';
+  interventions: Intervention[];
+  selectedIntervention: Intervention;
 
   constructor(private heroService: HeroService) {
     this.title = 'Inteventions';
@@ -81,8 +85,15 @@ export class AppComponent implements OnInit {
   onClickMe(): void {
     this.clickMessage = 'Vous avez lance une demander...';
   }
+  
+  addRow(): void {
+    this.clickMessage = 'Vous avez lance une demander...';
+      this.interventions.push({ 'codeIntervention': 111, 'numeroDIntervention': 'ddd', 'objetDeLIntervention':'ddfd' });
+    
+  }
 
   getHeroes(): void {
+    this.heroService.leerDatos();
     this.heroService.getHeroes().then(heroes => this.heroes = heroes);
   }
   onSelect(hero: Hero): void {
@@ -90,16 +101,25 @@ export class AppComponent implements OnInit {
     this.showModalSmS(this.selectedHero);
   }
 
+  onSelectIntervention(intervention: Intervention): void {
+    this.selectedIntervention = intervention;
+    this.showModalSmSIntervention(this.selectedIntervention);
+  }
+
   showModalSmS(hero: Hero) {
     console.log('Hola amigo [' + hero.name + ']');
-    if (hero.id == 1) {
-      alert('Esto mola mogollon....' + hero.name);
-    }
+    alert('Intervention selected: ' + hero.name);
   }
+
+  showModalSmSIntervention(intervention: Intervention) {
+    console.log('Hola amigo [' + intervention.codeIntervention + ']');
+    alert('Intervention selected: ' + intervention.codeIntervention);
+  }
+
   ngOnInit(): void {
     console.log("Inicializamos la lista...");
-    return this.getHeroes();
+    
+    this.heroService.getInterventions()
+      .subscribe(interventions => this.interventions = interventions);
   }
-
-
 }

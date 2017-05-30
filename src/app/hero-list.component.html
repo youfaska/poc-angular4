@@ -2,9 +2,13 @@
 <h2>Ma derniere intevention est: {{myHero}}</h2>
 <h2>Mes interventions</h2>
 <ul class="heroes">
-	<li *ngFor="let hero of heroes"
+	<!-- <li *ngFor="let hero of heroes"
 		[class.selected]="hero === selectedHero" (click)="onSelect(hero)">
 		<span class="badge">{{hero.id}}</span>{{hero.name}}
+	</li> -->
+	<li *ngFor="let intervention of interventions"
+		[class.selected]="intervention === selectedIntervention" (click)="onSelectIntervention(intervention)">
+		<span class="badge">{{intervention.codeIntervention}}</span>{{intervention.numeroDIntervention}}
 	</li>
 </ul>
 <button (click)="onClickMe()">Click me!</button>
@@ -15,4 +19,51 @@
 <p>{{box.value}}</p>
 <h4>Type away! Press [enter] when done.</h4>
 <div><key-up3></key-up3></div>
-<hero-detail [hero]="selectedHero"></hero-detail>
+<intervention-detail [intervention]="selectedIntervention"></intervention-detail>
+
+<form class="form-horizontal" role="form" ng-submit="addRow()">
+	<table class="table" name="tableInterventions">
+		<tr>
+			<th>Code d'ntervention
+			</th>
+			<th>Numero d'intervention
+			</th>
+			<th>Objet
+			</th>
+		</tr>
+		<tr *ngFor="let intervention of interventions">
+			<td>{{intervention.codeIntervention}}
+			</td>
+			<td>{{intervention.numeroDIntervention}}
+			</td>
+			<td>{{intervention.objetDeLIntervention}}
+			</td>
+		</tr>
+	</table>
+	<div class="form-group">
+		<label class="col-md-2 control-label">Code d'intervention</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" name="codeIntervention"
+				ng-model="codeIntervention" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-2 control-label">Numero d'intervention</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" name="numeroIntervention"
+				ng-model="numeroIntervention" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-md-2 control-label">Objet</label>
+		<div class="col-md-4">
+			<input type="text" class="form-control" name="objetIntervention"
+				ng-model="objetIntervention" />
+		</div>
+	</div>
+	<div class="form-group">								
+		<div style="padding-left:110px">
+			<input type="submit" (click)="addRow()" value="Submit" class="btn btn-primary"/>
+		</div>
+	</div>
+</form>
